@@ -1,0 +1,30 @@
+package spring.framwork;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @author yhe
+ * @date 2022/1/6
+ */
+public class PropertyValues {
+
+    private final List<PropertyValue> propertyValueList = new ArrayList<>();
+
+    public void addPropertyValue(PropertyValue pv) {
+        this.propertyValueList.add(pv);
+    }
+
+    public PropertyValue getPropertyValue(String propertyName) {
+        for (PropertyValue pv : propertyValueList) {
+            if (pv.getName().equals(propertyName)) {
+                return pv;
+            }
+        }
+        return null;
+    }
+
+    public PropertyValue[] getPropertyValues() {
+        return this.propertyValueList.toArray(new PropertyValue[0]);
+    }
+}

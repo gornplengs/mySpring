@@ -1,0 +1,37 @@
+package spring.io;
+
+import cn.hutool.core.lang.Assert;
+import spring.util.ClassUtils;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+
+/**
+ * @author yhe
+ * @date 2022/1/6
+ */
+public class ClassPathResource implements Resource {
+
+    private final String path;
+    private ClassLoader classLoader;
+
+    public ClassPathResource(String path) {
+        this(path, null);  //todo:(ClassLoader) null
+    }
+
+    public ClassPathResource(String path, ClassLoader classLoader) {
+        Assert.notNull(path, "Path can't be null");
+        this.path = path;
+        this.classLoader = classLoader!= null?classLoader: ClassUtils.getDefaultClassLoader();
+    }
+
+    @Override
+    public InputStream getInputStream() throws IOException {
+        InputStream is = classLoader.getResourceAsStream(path);
+        if (is == null) {
+            throw new FileNotFoundException(this.path + " does not exist");
+        }
+        return is;
+    }
+}

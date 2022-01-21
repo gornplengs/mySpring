@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+    <bean id="userDao" class="UserDao" init-method="initDataMethod" destroy-method="destroyDataMethod"/>
+    <bean id="userService" class="UserService">
+        <property name="id" value="1"/>
+        <property name="company" value="222"/>
+        <property name="location" value="BJS"/>
+        <property name="userDao" ref="userDao"/>
+    </bean>
+
+    <bean class="MyBeanPostProcessor"/>
+    <bean class="MyBeanFactoryProcessor"/>
+</beans>
